@@ -16,19 +16,16 @@ const StartInterview = ({params}) => {
     const [mockInterviewQuestions, setMockInterviewQuestions] = useState();
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
     useEffect(()=>{
+        const GetInterviewDetails = async() =>{
+            const result = await db.select().from(MockInterview)
+            .where(eq(MockInterview.mockId, params.interviewId));
+
+            setInterviewData(result[0]);
+            const jsonMockResp = JSON.parse(result[0]?.jsonMockResp);
+            setMockInterviewQuestions(jsonMockResp); 
+        }
         GetInterviewDetails();
-    },[]);
-  
-    const GetInterviewDetails = async() =>{
-        const result = await db.select().from(MockInterview)
-        .where(eq(MockInterview.mockId, params.interviewId));
-
-        setInterviewData(result[0]);
-        const jsonMockResp = JSON.parse(result[0]?.jsonMockResp);
-        setMockInterviewQuestions(jsonMockResp); 
-        console.log(jsonMockResp);
-
-    }
+    },[params.interviewId]);
     return (
     <div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">

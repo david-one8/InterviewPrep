@@ -13,35 +13,38 @@ import {
 import { ChevronsUpDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-function feedback({params}) {
+function Feedback({params}) {
     const [feedbackList, setFeedbackList] = useState(); 
     const [avgFeedback, setAvgFeedback] = useState();
     const router = useRouter();
+    
     useEffect(()=>{
-        GetFeedback();
-    },[]);
-    const GetFeedback = async () => {
-        const result = await db.select()
-        .from(UserAnswer)
-        .where(eq(UserAnswer.mockIdRef, params.interviewId))
-        .orderBy(UserAnswer.id);
-        setFeedbackList(result);
-        console.log(result);
+        const GetFeedback = async () => {
+            const result = await db.select()
+            .from(UserAnswer)
+            .where(eq(UserAnswer.mockIdRef, params.interviewId))
+            .orderBy(UserAnswer.id);
+            setFeedbackList(result);
+            console.log(result);
 
-        if(result?.length == 0){
-            setAvgFeedback(0);
-        }else{
-            let sum = 0;
-            for(let i = 0; i < result?.length; i++){
-                let rating = result[i].rating;
-                rating = rating[0];
-                sum += Number(rating);
+            if(result?.length == 0){
+                setAvgFeedback(0);
+            }else{
+                let sum = 0;
+                for(let i = 0; i < result?.length; i++){
+                    let rating = result[i].rating;
+                    rating = rating[0];
+                    sum += Number(rating);
+                }
+                let avg = sum / result?.length;
+                avg = Math.round(avg);
+                setAvgFeedback(avg);
             }
-            let avg = sum / result?.length;
-            avg = Math.round(avg);
-            setAvgFeedback(avg);
         }
-    }
+        
+        GetFeedback();
+    },[params.interviewId]);
+    
   return (
     <div className='p-10'>
         <h2 className="text-3xl font-bold text-emerald-500">
@@ -83,4 +86,4 @@ function feedback({params}) {
   )
 }
 
-export default feedback
+export default Feedback
