@@ -1,14 +1,17 @@
 import { SignUp } from "@clerk/nextjs";
+import Image from "next/image";
 
 export default function Page() {
   return (
     <section className="bg-white">
     <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
       <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
-        <img
-          alt=""
+        <Image
+          alt="Professional interview preparation background"
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80"
           className="absolute inset-0 h-full w-full object-cover opacity-80"
+          fill
+          priority
         />
 
         <div className="hidden lg:relative lg:block lg:p-12">
