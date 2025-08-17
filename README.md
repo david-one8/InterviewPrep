@@ -1,42 +1,117 @@
-## InterviewX: AI-Powered Mock Interview Platform
+# 🎯 InterviewPrep
 
-### Overview
-InterviewX is a full-stack web application built with Next.js that provides users an immersive and interactive mock interview experience. Users can input their desired job role, tech stack, and experience level to generate tailored interview questions. The platform offers instant feedback, performance tracking, and detailed analysis to help users improve their interview skills.
+> **AI-Powered Mock Interview Platform** - Practice interviews with personalized questions, real-time feedback, and detailed performance analytics.
 
-### Key Features
-* AI-Powered Question Generation
-* Real-Time Feedback
-* Performance Tracking
-* Detailed Analysis
-* User-Friendly Interface
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-18-blue?style=flat-square&logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 
-### Technology Stack
-* Frontend: Next.js, Reactjs, Shadcn, TailwindCss
-* Backend: PostgreSQL, Drizzle-orm
-* AI: Gemini
+## ✨ Features
 
+- 🤖 **AI Question Generation** - Gemini AI creates personalized interview questions based on job role, tech stack, and experience
+- 🎥 **Interactive Interview** - Webcam integration with speech-to-text for realistic interview simulation
+- 📊 **Smart Feedback** - AI-powered performance analysis with ratings and improvement suggestions
+- 🔒 **Secure Authentication** - Clerk-based user management with protected routes
+- 📱 **Responsive Design** - Modern UI with shadcn/ui components and Tailwind CSS
+- 🎤 **Voice Features** - Text-to-speech question reading and speech recognition for answers
 
-## Getting Started
+## 🛠️ Tech Stack
 
-First, run the development server:
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 14 (App Router) |
+| **Frontend** | React 18, TypeScript |
+| **Styling** | Tailwind CSS, shadcn/ui |
+| **Authentication** | Clerk |
+| **Database** | PostgreSQL (Neon) + Drizzle ORM |
+| **AI** | Google Gemini API |
+| **Voice** | Web Speech API, react-hook-speech-to-text |
+| **Media** | react-webcam |
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Getting Started
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/david-one8/InterviewPrep.git
+   cd InterviewPrep
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup**
+   Create a `.env.local` file with:
+
+   ```env
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+   CLERK_SECRET_KEY=your_clerk_secret
+   NEXT_PUBLIC_DATABASE_URL=your_neon_database_url
+   NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
+   ```
+
+4. **Database Setup**
+
+   ```bash
+   npm run db:push
+   ```
+
+5. **Start Development Server**
+
+   ```bash
+   npm run dev
+   ```
+
+## 📝 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm start` | Run production build |
+| `npm run lint` | Run ESLint |
+| `npm run db:push` | Push schema to database |
+| `npm run db:studio` | Open Drizzle Studio |
+
+## 🗂️ Project Structure
+
+```text
+app/
+├── (auth)/                    # Authentication pages
+│   ├── sign-in/
+│   └── sign-up/
+├── dashboard/                 # Main dashboard
+│   ├── _components/           # Dashboard components
+│   └── interview/[id]/        # Interview flow
+│       ├── start/             # Interview session
+│       └── feedback/          # Results & feedback
+├── layout.js                 # Root layout with Clerk
+└── page.js                   # Home (redirects to dashboard)
+
+components/ui/                 # Reusable UI components
+utils/                        # Database & AI utilities
+drizzle/                      # Database migrations
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 How It Works
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. **Create Interview** - Input job details and experience level
+2. **AI Generation** - Gemini creates 5 personalized questions
+3. **Practice Session** - Answer questions with webcam and microphone
+4. **Get Feedback** - Receive AI-powered analysis and improvement tips
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-## Deploy on Vercel
+## 🤝 Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+*Elegant, focused, and built for practice.* ✨
