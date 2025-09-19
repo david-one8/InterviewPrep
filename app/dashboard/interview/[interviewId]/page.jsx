@@ -26,62 +26,62 @@ const Interview = ({params}) => {
     },[params.interviewId]);
   
     return (
-    <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Let&apos;s Get Started 🎯</h1>
-                <p className="text-gray-600">Review your interview details and enable your camera to begin</p>
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-8">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div className="text-center mb-6 sm:mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Let&apos;s Get Started 🎯</h1>
+                <p className="text-gray-600 text-sm sm:text-base">Review your interview details and enable your camera to begin</p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 {/* Interview Details */}
-                <div className="space-y-6">
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <Briefcase className="h-5 w-5 mr-2 text-fuchsia-600" />
+                <div className="space-y-4 sm:space-y-6">
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+                        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <Briefcase className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-fuchsia-600" />
                             Interview Details
                         </h2>
-                        <div className="space-y-4">
+                        <div className="space-y-3 sm:space-y-4">
                             <div className="flex items-start">
-                                <div className="w-2 h-2 bg-fuchsia-500 rounded-full mt-2 mr-3"></div>
-                                <div>
-                                    <p className="text-sm font-medium text-gray-500">Job Position</p>
-                                    <p className="text-lg font-semibold text-gray-900">{interviewData?.jobPosition}</p>
+                                <div className="w-2 h-2 bg-fuchsia-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                <div className="min-w-0">
+                                    <p className="text-xs sm:text-sm font-medium text-gray-500">Job Position</p>
+                                    <p className="text-base sm:text-lg font-semibold text-gray-900 break-words">{interviewData?.jobPosition}</p>
                                 </div>
                             </div>
                             <div className="flex items-start">
-                                <div className="w-2 h-2 bg-fuchsia-500 rounded-full mt-2 mr-3"></div>
-                                <div>
-                                    <p className="text-sm font-medium text-gray-500">Tech Stack & Description</p>
-                                    <p className="text-gray-700">{interviewData?.jobDesc}</p>
+                                <div className="w-2 h-2 bg-fuchsia-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                <div className="min-w-0">
+                                    <p className="text-xs sm:text-sm font-medium text-gray-500">Tech Stack & Description</p>
+                                    <p className="text-sm sm:text-base text-gray-700 break-words">{interviewData?.jobDesc}</p>
                                 </div>
                             </div>
                             <div className="flex items-start">
-                                <div className="w-2 h-2 bg-fuchsia-500 rounded-full mt-2 mr-3"></div>
-                                <div>
-                                    <p className="text-sm font-medium text-gray-500">Experience Level</p>
-                                    <p className="text-lg font-semibold text-gray-900">{interviewData?.jobExperience} years</p>
+                                <div className="w-2 h-2 bg-fuchsia-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                <div className="min-w-0">
+                                    <p className="text-xs sm:text-sm font-medium text-gray-500">Experience Level</p>
+                                    <p className="text-base sm:text-lg font-semibold text-gray-900">{interviewData?.jobExperience} years</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     {/* Information Card */}
-                    <div className="bg-gradient-to-br from-yellow-50 to-amber-50 border border-yellow-200 rounded-xl p-6">
+                    <div className="bg-gradient-to-br from-yellow-50 to-amber-50 border border-yellow-200 rounded-xl p-4 sm:p-6">
                         <div className="flex items-start">
                             <div className="flex-shrink-0">
-                                <Lightbulb className="h-6 w-6 text-yellow-600" />
+                                <Lightbulb className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-600" />
                             </div>
                             <div className="ml-3">
-                                <h3 className="text-lg font-medium text-yellow-800 mb-2">Interview Instructions</h3>
-                                <div className="text-yellow-700 space-y-2">
+                                <h3 className="text-base sm:text-lg font-medium text-yellow-800 mb-2">Interview Instructions</h3>
+                                <div className="text-yellow-700 space-y-1 sm:space-y-2 text-sm sm:text-base">
                                     <p>• Enable your webcam and microphone for the best experience</p>
                                     <p>• You&apos;ll be asked 5 AI-generated questions based on your profile</p>
                                     <p>• Speak clearly and take your time to answer each question</p>
                                     <p>• Get detailed feedback and suggestions after completion</p>
                                 </div>
-                                <div className="mt-4 p-3 bg-yellow-100 rounded-lg">
-                                    <p className="text-sm text-yellow-800">
+                                <div className="mt-3 sm:mt-4 p-3 bg-yellow-100 rounded-lg">
+                                    <p className="text-xs sm:text-sm text-yellow-800">
                                         <strong>Privacy:</strong> We never record or store your video. Camera access can be disabled anytime.
                                     </p>
                                 </div>
@@ -91,10 +91,10 @@ const Interview = ({params}) => {
                 </div>
 
                 {/* Camera Setup */}
-                <div className="space-y-6">
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <WebcamIcon className="h-5 w-5 mr-2 text-fuchsia-600" />
+                <div className="space-y-4 sm:space-y-6">
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+                        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <WebcamIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-fuchsia-600" />
                             Camera Setup
                         </h2>
                         
@@ -105,27 +105,29 @@ const Interview = ({params}) => {
                                         onUserMedia={() => setWebcamEnabled(true)}
                                         onUserMediaError={() => setWebcamEnabled(false)}
                                         mirrored={true}
-                                        className="w-full h-80 object-cover"
+                                        className="w-full h-48 sm:h-64 lg:h-80 object-cover"
                                     />
-                                    <div className="absolute top-4 right-4">
-                                        <div className="flex items-center space-x-2 bg-green-500 text-white px-3 py-1 rounded-full text-sm">
-                                            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                                            <span>Camera Active</span>
+                                    <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
+                                        <div className="flex items-center space-x-1 sm:space-x-2 bg-green-500 text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
+                                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse"></div>
+                                            <span className="hidden sm:inline">Camera Active</span>
+                                            <span className="sm:hidden">Active</span>
                                         </div>
                                     </div>
                                 </div>
                             ) : (
                                 <div className="relative">
-                                    <div className="bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 p-12 text-center">
-                                        <WebcamIcon className="h-24 w-24 text-gray-400 mx-auto mb-4" />
-                                        <h3 className="text-lg font-medium text-gray-900 mb-2">Camera Disabled</h3>
-                                        <p className="text-gray-500 mb-4">Enable your camera to start the interview</p>
+                                    <div className="bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 p-8 sm:p-12 text-center">
+                                        <WebcamIcon className="h-16 w-16 sm:h-24 sm:w-24 text-gray-400 mx-auto mb-4" />
+                                        <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">Camera Disabled</h3>
+                                        <p className="text-gray-500 mb-4 text-sm sm:text-base">Enable your camera to start the interview</p>
                                         <Button 
                                             onClick={() => setWebcamEnabled(true)}
-                                            className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-2"
+                                            className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-4 py-2 sm:px-6 sm:py-2 text-sm sm:text-base w-full sm:w-auto"
                                         >
-                                            <WebcamIcon className="h-4 w-4 mr-2" />
-                                            Enable Camera & Microphone
+                                            <WebcamIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+                                            <span className="hidden sm:inline">Enable Camera & Microphone</span>
+                                            <span className="sm:hidden">Enable Camera</span>
                                         </Button>
                                     </div>
                                 </div>
@@ -136,28 +138,28 @@ const Interview = ({params}) => {
             </div>
 
             {/* Start Interview Button */}
-            <div className="mt-8 text-center">
+            <div className="mt-6 sm:mt-8 text-center">
                 <Link href={`/dashboard/interview/${params.interviewId}/start`}>
                     <Button 
                         size="lg"
-                        className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-8 py-3 text-lg font-medium"
+                        className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 sm:px-8 sm:py-3 text-base sm:text-lg font-medium w-full sm:w-auto"
                         disabled={!webcamEnabled}
                     >
                         {webcamEnabled ? (
                             <>
-                                <Play className="h-5 w-5 mr-2" />
+                                <Play className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                                 Start Interview
                             </>
                         ) : (
                             <>
-                                <WebcamIcon className="h-5 w-5 mr-2" />
+                                <WebcamIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                                 Enable Camera First
                             </>
                         )}
                     </Button>
                 </Link>
                 {!webcamEnabled && (
-                    <p className="text-sm text-gray-500 mt-2">Please enable your camera to proceed with the interview</p>
+                    <p className="text-xs sm:text-sm text-gray-500 mt-2">Please enable your camera to proceed with the interview</p>
                 )}
             </div>
         </div>
