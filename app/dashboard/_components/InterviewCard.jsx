@@ -14,46 +14,46 @@ function InterviewCard({interview}) {
     }
     
     return (
-    <div className="group bg-white border border-gray-200 hover:border-fuchsia-300 shadow-sm hover:shadow-lg rounded-xl p-6 transition-all duration-300 hover:-translate-y-1">
+    <div className="group bg-white border border-gray-200 hover:border-fuchsia-300 shadow-sm hover:shadow-lg rounded-xl p-4 sm:p-6 transition-all duration-300 hover:-translate-y-1">
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
-            <div className="flex-1">
-                <h3 className="font-bold text-lg text-gray-800 group-hover:text-fuchsia-600 transition-colors overflow-hidden">
+            <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-base sm:text-lg text-gray-800 group-hover:text-fuchsia-600 transition-colors truncate pr-2">
                     {interview?.jobPosition}
                 </h3>
                 <div className="flex items-center gap-2 mt-2 text-gray-600">
-                    <Briefcase className="h-4 w-4" />
-                    <span className="text-sm">{interview?.jobExperience} years experience</span>
+                    <Briefcase className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm">{interview?.jobExperience} years experience</span>
                 </div>
             </div>
-            <div className="w-12 h-12 bg-fuchsia-100 rounded-full flex items-center justify-center group-hover:bg-fuchsia-200 transition-colors">
-                <Play className="h-6 w-6 text-fuchsia-600" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-fuchsia-100 rounded-full flex items-center justify-center group-hover:bg-fuchsia-200 transition-colors flex-shrink-0">
+                <Play className="h-5 w-5 sm:h-6 sm:w-6 text-fuchsia-600" />
             </div>
         </div>
 
         {/* Date */}
-        <div className="flex items-center gap-2 text-gray-500 mb-6">
-            <Calendar className="h-4 w-4" />
-            <span className="text-sm">Taken on {interview?.createdAt}</span>
+        <div className="flex items-center gap-2 text-gray-500 mb-4 sm:mb-6">
+            <Calendar className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+            <span className="text-xs sm:text-sm">Taken on {interview?.createdAt}</span>
         </div>
 
         {/* Actions */}
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <Button 
                 size="sm" 
                 variant="outline" 
-                className="flex-1 border-fuchsia-200 text-fuchsia-600 hover:bg-fuchsia-50 hover:border-fuchsia-300 transition-all"
+                className="flex-1 border-fuchsia-200 text-fuchsia-600 hover:bg-fuchsia-50 hover:border-fuchsia-300 transition-all text-xs sm:text-sm h-9 sm:h-10"
                 onClick={onFeedback}
             >
-                <BarChart3 className="h-4 w-4 mr-2" />
+                <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                 View Feedback
             </Button>
             <Button 
                 size="sm" 
-                className="flex-1 bg-fuchsia-600 hover:bg-fuchsia-700 text-white transition-all"
+                className="flex-1 bg-fuchsia-600 hover:bg-fuchsia-700 text-white transition-all text-xs sm:text-sm h-9 sm:h-10"
                 onClick={onStart}
             >
-                <Play className="h-4 w-4 mr-2" />
+                <Play className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                 Start Again
             </Button>
         </div>
