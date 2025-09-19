@@ -74,47 +74,53 @@ export const NewInterview = () => {
     };
     return (
     <div>
-        <div className="p-10 border rounded-lg bg-secondary
-        hover:scale-105 hover:shadow-md cursor-pointer transition-all"
+        <div className="p-6 sm:p-8 lg:p-10 border rounded-lg bg-secondary
+        hover:scale-105 hover:shadow-md cursor-pointer transition-all touch-manipulation"
         onClick={()=>setOpenDialog(true)}>
-            <h2 className="font-bold text-lg text-center">+ Add New</h2>
+            <h2 className="font-bold text-base sm:text-lg text-center">+ Add New</h2>
         </div>
         <Dialog open={OpenDialog}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl w-[95vw] sm:w-full max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-            <DialogTitle className="text-2xl">
+            <DialogTitle className="text-lg sm:text-2xl">
                 Tell us more about the job you are interviewing</DialogTitle>
             <DialogDescription>
                 <form onSubmit={onSubmit}>
                 <div>
-                    <h2>
+                    <h2 className="text-sm sm:text-base mb-4">
                         Add details about your job position/role, job description,
                         your skills and years of experience 
                     </h2>
                     <div className="my-3 p-1">
-                        <label>Job Role/Job Position</label>
+                        <label className="block text-sm font-medium mb-1">Job Role/Job Position</label>
                         <Input placeholder="Eg. FrontEnd Engineer" required
-                        onChange={(e)=>setJobPosition(e.target.value)}></Input>
+                        onChange={(e)=>setJobPosition(e.target.value)}
+                        className="w-full"></Input>
                     </div>
-                    <div className="my-1 p-1">
-                        <label>Job Description and Tech Stack (in short)</label>
+                    <div className="my-3 p-1">
+                        <label className="block text-sm font-medium mb-1">Job Description and Tech Stack (in short)</label>
                         <Textarea 
                         placeholder="Eg. Reactjs, Nodejs, Nextjs, UI design" required
-                        onChange={(e)=>setJobDesc(e.target.value)}></Textarea>
+                        onChange={(e)=>setJobDesc(e.target.value)}
+                        className="w-full min-h-[80px] resize-none"></Textarea>
                     </div>
-                    <div className="my-1 p-1">
-                        <label>Years of Experience</label>
+                    <div className="my-3 p-1">
+                        <label className="block text-sm font-medium mb-1">Years of Experience</label>
                         <Input placeholder="Eg. 5" type="number" required max="50"
-                        onChange={(e)=>setJobExperience(e.target.value)}></Input>
+                        onChange={(e)=>setJobExperience(e.target.value)}
+                        className="w-full"></Input>
                     </div>
                 </div>
-                <div className="flex gap-5 justify-end">
-                    <Button variant = "ghost" type="button" className="border-2 border-black text-black"
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-end mt-6">
+                    <Button variant = "ghost" type="button" className="border-2 border-black text-black w-full sm:w-auto order-2 sm:order-1"
                     onClick={()=>setOpenDialog(false)}>Cancel</Button>
-                    <Button type="submit" disabled={loadings}>
+                    <Button type="submit" disabled={loadings} className="w-full sm:w-auto order-1 sm:order-2">
                     {loadings ?
                         <>
-                        <LoaderCircle className = "animate-spin"/>AI is generating questions</>
+                        <LoaderCircle className = "animate-spin mr-2"/>
+                        <span className="hidden sm:inline">AI is generating questions</span>
+                        <span className="sm:hidden">Generating...</span>
+                        </>
                         :"Start Interview"
                     }</Button>
                 </div>
