@@ -52,24 +52,28 @@ function InterviewList() {
   }
 
   return (
-    <div className="space-y-3">
-      <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
-        <h2 className="font-medium text-xl">Previous Attempted Interviews</h2>
-        <div className="flex gap-2">
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <h2 className="font-medium text-lg sm:text-xl">Previous Attempted Interviews</h2>
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <Input
             placeholder="Search by role or description"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-64"
+            className="w-full sm:w-64"
             aria-label="Search interviews"
           />
-          <Button variant="outline" onClick={() => setSort((s) => (s === 'asc' ? 'desc' : 'asc'))}>
+          <Button 
+            variant="outline" 
+            onClick={() => setSort((s) => (s === 'asc' ? 'desc' : 'asc'))}
+            className="w-full sm:w-auto"
+          >
             Sort {sort === 'asc' ? '↑' : '↓'}
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-col-2 lg:grid-cols-3 gap-5 my-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 my-5">
         {filtered.map((interview, index) => (
           <InterviewCard key={index} interview={interview} />
         ))}
