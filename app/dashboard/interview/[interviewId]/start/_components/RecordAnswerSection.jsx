@@ -152,38 +152,43 @@ const RecordAnswerSection = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-          <Video className="h-5 w-5 mr-2 text-fuchsia-600" />
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+      <div className="mb-4 sm:mb-6">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 flex items-center">
+          <Video className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-fuchsia-600 flex-shrink-0" />
           Record Your Answer
         </h2>
-        <p className="text-gray-600 text-sm mt-1">
+        <p className="text-gray-600 text-xs sm:text-sm mt-1">
           Speak clearly and take your time. Your response will be automatically
           transcribed.
         </p>
       </div>
 
       {/* Webcam Area */}
-      <div className="relative mb-6">
+      <div className="relative mb-4 sm:mb-6">
         <div className="relative bg-gray-900 rounded-xl overflow-hidden">
-          <Webcam mirrored={true} className="w-full h-64 object-cover" />
+          <Webcam 
+            mirrored={true} 
+            className="w-full h-48 sm:h-64 lg:h-72 object-cover" 
+            style={{ maxHeight: 'min(72vh, 300px)' }}
+          />
 
           {/* Recording Indicator */}
           {isRecording && (
-            <div className="absolute top-4 left-4">
-              <div className="flex items-center space-x-2 bg-red-500 text-white px-3 py-1 rounded-full text-sm">
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                <span>REC {formatTime(recordingTime)}</span>
+            <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+              <div className="flex items-center space-x-1 sm:space-x-2 bg-red-500 text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse"></div>
+                <span className="font-medium">REC {formatTime(recordingTime)}</span>
               </div>
             </div>
           )}
 
           {/* Status Badge */}
-          <div className="absolute top-4 right-4">
-            <div className="flex items-center space-x-2 bg-green-500 text-white px-3 py-1 rounded-full text-sm">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span>Camera Active</span>
+          <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
+            <div className="flex items-center space-x-1 sm:space-x-2 bg-green-500 text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></div>
+              <span className="font-medium hidden sm:inline">Camera Active</span>
+              <span className="font-medium sm:hidden">Active</span>
             </div>
           </div>
         </div>
@@ -191,11 +196,11 @@ const RecordAnswerSection = ({
 
       {/* Transcription Area */}
       {(userAnswer || isRecording) && (
-        <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-          <h3 className="text-sm font-medium text-gray-700 mb-2">
+        <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
+          <h3 className="text-xs sm:text-sm font-medium text-gray-700 mb-2">
             Live Transcription:
           </h3>
-          <p className="text-gray-900 min-h-[60px]">
+          <div className="text-gray-900 min-h-[48px] sm:min-h-[60px] max-h-32 sm:max-h-40 overflow-y-auto text-sm sm:text-base">
             {userAnswer}
             {isRecording && interimResult && (
               <span className="text-gray-500 italic"> {interimResult}</span>
@@ -203,7 +208,7 @@ const RecordAnswerSection = ({
             {isRecording && !interimResult && !userAnswer && (
               <span className="text-gray-400 italic">Listening...</span>
             )}
-          </p>
+          </div>
         </div>
       )}
 
@@ -213,7 +218,7 @@ const RecordAnswerSection = ({
           onClick={StartStopRecording}
           disabled={loading}
           size="lg"
-          className={`px-8 py-3 text-lg font-medium transition-all duration-200 ${
+          className={`w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3 text-base sm:text-lg font-medium transition-all duration-200 min-h-[48px] touch-manipulation ${
             isRecording
               ? "bg-red-600 hover:bg-red-700 text-white"
               : "bg-fuchsia-600 hover:bg-fuchsia-700 text-white"
@@ -221,28 +226,30 @@ const RecordAnswerSection = ({
         >
           {isRecording ? (
             <>
-              <Square className="h-5 w-5 mr-2" />
+              <Square className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
               Stop Recording
             </>
           ) : (
             <>
-              <Mic className="h-5 w-5 mr-2" />
+              <Mic className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
               Record Answer
             </>
           )}
         </Button>
 
         {loading && (
-          <div className="mt-4 flex items-center justify-center text-fuchsia-600">
+          <div className="mt-3 sm:mt-4 flex items-center justify-center text-fuchsia-600">
             <Loader className="animate-spin h-4 w-4 mr-2" />
-            <span className="text-sm">Processing your answer...</span>
+            <span className="text-xs sm:text-sm">Processing your answer...</span>
           </div>
         )}
 
         {error && (
-          <p className="mt-2 text-sm text-red-600">
-            Microphone error: {error}
-          </p>
+          <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-xs sm:text-sm text-red-600 text-center">
+              <strong>Microphone error:</strong> {error}
+            </p>
+          </div>
         )}
       </div>
     </div>
