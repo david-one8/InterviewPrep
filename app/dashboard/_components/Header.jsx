@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { UserButton } from '@clerk/nextjs'
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,10 +25,10 @@ function Header() {
 
     return (
     <>
-        <div className="flex p-4 items-center justify-between bg-secondary shadow-sm">
+        <div className="flex p-4 items-center justify-between bg-secondary shadow-sm border-b border-border">
             <div className="flex flex-row cursor-pointer" onClick={BackToHome}>
                 <Image src={'/logo.svg'} width={50} height={44} alt='logo' className="w-10 h-10 sm:w-12 sm:h-12"/>
-                <div className="text-xl sm:text-2xl p-2 sm:p-4 font-bold">InterviewPrep</div>
+                <div className="text-xl sm:text-2xl p-2 sm:p-4 font-bold text-foreground">InterviewPrep</div>
             </div>
             
             {/* Desktop Navigation */}
@@ -37,7 +38,7 @@ function Header() {
                         key={`desktop-${item.name}-${index}`}
                         onClick={item.onClick}
                         className={`hover:text-fuchsia-500 hover:font-bold transition-all duration-200 cursor-pointer px-3 py-2 rounded-md
-                            ${path === item.path ? 'text-fuchsia-500 font-bold bg-fuchsia-50' : 'text-gray-700'}    
+                            ${path === item.path ? 'text-fuchsia-500 font-bold bg-fuchsia-50 dark:bg-fuchsia-950' : 'text-foreground'}    
                         `}
                     >
                         {item.name}
@@ -45,11 +46,12 @@ function Header() {
                 ))}
             </ul>
 
-            {/* Mobile Menu Button & User Button */}
-            <div className="flex items-center gap-3">
+            {/* Theme Toggle, User Button & Mobile Menu Button */}
+            <div className="flex items-center gap-2 sm:gap-3">
+                <ThemeToggle />
                 <UserButton afterSignOutUrl="/sign-in" />
                 <button 
-                    className="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors"
+                    className="md:hidden p-2 rounded-md hover:bg-accent transition-colors"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     aria-label="Toggle mobile menu"
                 >
@@ -63,14 +65,14 @@ function Header() {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-            <div className="md:hidden bg-white border-b shadow-lg">
+            <div className="md:hidden bg-background border-b border-border shadow-lg">
                 <ul className='flex flex-col'>
                     {navItems.map((item, index) => (
                         <li 
                             key={`mobile-${item.name}-${index}`}
                             onClick={item.onClick}
-                            className={`px-4 py-3 border-b border-gray-100 hover:bg-fuchsia-50 hover:text-fuchsia-500 transition-all duration-200 cursor-pointer
-                                ${path === item.path ? 'text-fuchsia-500 font-bold bg-fuchsia-50' : 'text-gray-700'}    
+                            className={`px-4 py-3 border-b border-border hover:bg-fuchsia-50 dark:hover:bg-fuchsia-950 hover:text-fuchsia-500 transition-all duration-200 cursor-pointer
+                                ${path === item.path ? 'text-fuchsia-500 font-bold bg-fuchsia-50 dark:bg-fuchsia-950' : 'text-foreground'}    
                             `}
                         >
                             {item.name}
