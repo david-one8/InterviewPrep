@@ -8,7 +8,7 @@ export const metadata = {
 };
 function Dashboardlayout({children}) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
         <Header></Header>
         <div className="mx-2 sm:mx-4 md:mx-8 lg:mx-16 pb-4">
           {children}
