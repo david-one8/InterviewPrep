@@ -19,7 +19,9 @@ import { v4 as uuidv4} from 'uuid';
 import { useUser } from '@clerk/nextjs';
 import moment from 'moment/moment';
 import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation';
+
+
 export const NewInterview = () => {
     const [OpenDialog, setOpenDialog] = useState(false);
     const [jobPosition, setJobPosition] = useState();
@@ -28,50 +30,78 @@ export const NewInterview = () => {
     const [loadings, setLoadings] = useState(false);
     const [jsonResponse, setJsonResponse] = useState([]);
 
+
     const {user} = useUser();
     const router = useRouter();
     const path = usePathname();
     console.log(path);
+
+
     const onSubmit = async(e) => {
-        setLoadings(true);
         e.preventDefault();
+        setLoadings(true);
         console.log(jobDesc, jobPosition, jobExperience);
+
 
         const Inputprompt = "Job Position: "+ jobPosition + ", Job description: "  + jobDesc + ", Years of experience: "+ jobExperience +", Depending on this information, generate 5 interview questions with answers in JSON formate. Give Question and Answered as fields in JSON. Do not add any unnecessary explanation in the response. just the json response";
 
+
         const result = await chatSession.sendMessage(Inputprompt);
-        let mockjsonresponse = (result.response.text()).replace('```json', '').replace('```', '');
-        mockjsonresponse.slice(0,-4)
-        //console.log(mockjsonresponse);
+        let mockjsonresponse = await result.response.text();
+
+        // Remove all markdown code block markers and stray 'json' text globally, then trim
+        mockjsonresponse = mockjsonresponse
+                 .split('```json').join('')
+                 .split('```').join('')
+                 .replace(/json/gi, '')
+                 .trim();
+
+
+        // Extract JSON substring to last closing brace or bracket
+        const lastBrace = mockjsonresponse.lastIndexOf('}');
+        const lastBracket = mockjsonresponse.lastIndexOf(']');
+        const truncateAt = Math.max(lastBrace, lastBracket);
+        if(truncateAt !== -1) {
+            mockjsonresponse = mockjsonresponse.substring(0, truncateAt + 1);
+        }
+
+
         setJsonResponse(mockjsonresponse);
-        console.log(JSON.parse(mockjsonresponse));
 
-        //stroing in db
-        if(mockjsonresponse){
-            const resp = await db.insert(MockInterview)
-            .values({
-                mockId:uuidv4(),
-                jsonMockResp: mockjsonresponse,
-                jobPosition: jobPosition,
-                jobDesc: jobDesc,
-                jobExperience: jobExperience,
-                createdBy: user?.primaryEmailAddress?.emailAddress,
-                createdAt: moment().format('DD-MM-yyyy'),
-            }).returning({mockId: MockInterview.mockId});
 
-            console.log("Intered id", resp);
-            if(resp ){
-                setOpenDialog(false);
-                if(path != "/dashboard/interview/"+resp[0]?.mockId){
-                    router.push("/dashboard/interview/"+resp[0]?.mockId);
+        try {
+            const parsedResponse = JSON.parse(mockjsonresponse);
+            console.log(parsedResponse);
+            if(parsedResponse){
+                const resp = await db.insert(MockInterview)
+                .values({
+                    mockId:uuidv4(),
+                    jsonMockResp: mockjsonresponse,
+                    jobPosition: jobPosition,
+                    jobDesc: jobDesc,
+                    jobExperience: jobExperience,
+                    createdBy: user?.primaryEmailAddress?.emailAddress,
+                    createdAt: moment().format('DD-MM-yyyy'),
+                }).returning({mockId: MockInterview.mockId});
+
+
+                console.log("Inserted id", resp);
+                if(resp ){
+                    setOpenDialog(false);
+                    if(path != "/dashboard/interview/"+resp[0]?.mockId){
+                        router.push("/dashboard/interview/"+resp[0]?.mockId);
+                    }
                 }
             }
-        }else{
-            console.log("No response from Gemini AI");
+        } catch (error) {
+            console.error("JSON parsing error:", error, mockjsonresponse);
         }
+
 
         setLoadings(false);
     };
+
+
     return (
     <div>
         <div className="p-6 sm:p-8 lg:p-10 border rounded-lg bg-secondary
@@ -130,5 +160,5 @@ export const NewInterview = () => {
         </DialogContent>
         </Dialog>
     </div>
-  )
+    )
 }
