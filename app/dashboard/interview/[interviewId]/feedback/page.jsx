@@ -51,54 +51,54 @@ function Feedback({params}) {
             <h2 className="text-2xl sm:text-3xl font-bold text-emerald-500 mb-2">
                 Congratulations! 🎉
             </h2>
-            <h2 className="font-bold text-lg sm:text-2xl mb-3 sm:mb-4 text-gray-800">
+            <h2 className="font-bold text-lg sm:text-2xl mb-3 sm:mb-4 text-gray-800 dark:text-gray-200">
                 Below is feedback of your performance
             </h2>
-            <div className="inline-flex items-center px-4 py-2 bg-fuchsia-50 border border-fuchsia-200 rounded-lg">
-                <h2 className="text-fuchsia-600 text-base sm:text-xl font-semibold">
-                    Your overall interview rating: <strong className="text-fuchsia-700">{avgFeedback}/10</strong>
+            <div className="inline-flex items-center px-4 py-2 bg-fuchsia-50 dark:bg-fuchsia-950/30 border border-fuchsia-200 dark:border-fuchsia-800 rounded-lg">
+                <h2 className="text-fuchsia-600 dark:text-fuchsia-400 text-base sm:text-xl font-semibold">
+                    Your overall interview rating: <strong className="text-fuchsia-700 dark:text-fuchsia-300">{avgFeedback}/10</strong>
                 </h2>
             </div>
         </div>
         
         <div className="mb-6">
-            <h2 className="text-base sm:text-lg text-gray-700 mb-4">
+            <h2 className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Find below all the interview questions with correct answers, 
                 your answers, and feedback for improvement:
             </h2>
             
             <div className="space-y-3 sm:space-y-4">
                 {feedbackList && feedbackList.map((item, index) =>(
-                    <Collapsible key = {index} className="border border-gray-200 rounded-lg overflow-hidden">
-                    <CollapsibleTrigger className = "p-3 sm:p-4 bg-yellow-50 hover:bg-yellow-100 text-left flex justify-between items-center gap-3 w-full transition-colors">
-                        <span className="text-sm sm:text-base font-medium text-gray-800 flex-1 min-w-0">
+                    <Collapsible key = {index} className="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden">
+                    <CollapsibleTrigger className = "p-3 sm:p-4 bg-yellow-50 dark:bg-yellow-950/30 hover:bg-yellow-100 dark:hover:bg-yellow-950/50 text-left flex justify-between items-center gap-3 w-full transition-colors">
+                        <span className="text-sm sm:text-base font-medium text-gray-800 dark:text-gray-200 flex-1 min-w-0">
                             <span className="hidden sm:inline">Q{index + 1}: </span>{item.question}
                         </span>
-                        <ChevronsUpDown className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500 flex-shrink-0" />
+                        <ChevronsUpDown className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500 dark:text-gray-400 flex-shrink-0" />
                     </CollapsibleTrigger>
-                    <CollapsibleContent className="border-t border-gray-200">
+                    <CollapsibleContent className="border-t border-gray-200 dark:border-gray-800">
                         <div className="p-3 sm:p-4 space-y-3 sm:space-y-4">
                             <div className="flex items-center justify-center">
-                                <div className="inline-flex items-center px-3 py-1 bg-yellow-100 border border-yellow-300 rounded-full">
-                                    <span className="text-yellow-700 font-semibold text-sm">
+                                <div className="inline-flex items-center px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-800 rounded-full">
+                                    <span className="text-yellow-700 dark:text-yellow-400 font-semibold text-sm">
                                         Rating: {item.rating[0]}/10
                                     </span>
                                 </div>
                             </div>
                             
-                            <div className="p-3 sm:p-4 rounded-lg bg-red-50 border border-red-200">
-                                <h3 className="font-semibold text-red-800 mb-2 text-sm sm:text-base">Your Answer:</h3>
-                                <p className="text-xs sm:text-sm text-red-700 leading-relaxed">{item.userAns}</p>
+                            <div className="p-3 sm:p-4 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
+                                <h3 className="font-semibold text-red-800 dark:text-red-300 mb-2 text-sm sm:text-base">Your Answer:</h3>
+                                <p className="text-xs sm:text-sm text-red-700 dark:text-red-400 leading-relaxed">{item.userAns}</p>
                             </div>
                             
-                            <div className="p-3 sm:p-4 rounded-lg bg-green-50 border border-green-200">
-                                <h3 className="font-semibold text-green-800 mb-2 text-sm sm:text-base">Sample Correct Answer:</h3>
-                                <p className="text-xs sm:text-sm text-green-700 leading-relaxed">{item.correctAns}</p>
+                            <div className="p-3 sm:p-4 rounded-lg bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800">
+                                <h3 className="font-semibold text-green-800 dark:text-green-300 mb-2 text-sm sm:text-base">Sample Correct Answer:</h3>
+                                <p className="text-xs sm:text-sm text-green-700 dark:text-green-400 leading-relaxed">{item.correctAns}</p>
                             </div>
                             
-                            <div className="p-3 sm:p-4 rounded-lg bg-blue-50 border border-blue-200">
-                                <h3 className="font-semibold text-blue-800 mb-2 text-sm sm:text-base">Feedback:</h3>
-                                <p className="text-xs sm:text-sm text-blue-700 leading-relaxed">{item.feedback}</p>
+                            <div className="p-3 sm:p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
+                                <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-2 text-sm sm:text-base">Feedback:</h3>
+                                <p className="text-xs sm:text-sm text-blue-700 dark:text-blue-400 leading-relaxed">{item.feedback}</p>
                             </div>
                         </div>
                     </CollapsibleContent>

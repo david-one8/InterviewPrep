@@ -27,7 +27,7 @@ const StartInterview = ({params}) => {
         GetInterviewDetails();
     },[params.interviewId]);
     return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 p-4 sm:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                 <QuestionSection 
@@ -42,9 +42,9 @@ const StartInterview = ({params}) => {
             </div>
             
             {/* Navigation Controls */}
-            <div className="mt-6 sm:mt-8 sticky bottom-4 sm:bottom-6 bg-white rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
+            <div className="mt-6 sm:mt-8 sticky bottom-4 sm:bottom-6 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-5">
-                    <div className="text-xs sm:text-sm text-gray-600 order-2 sm:order-1">
+                    <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 order-2 sm:order-1">
                         Progress: {activeQuestionIndex + 1} of {mockInterviewQuestions?.length || 0} questions
                     </div>
                     
