@@ -117,32 +117,32 @@ export const NewInterview = () => {
             <DialogDescription>
                 <form onSubmit={onSubmit}>
                 <div>
-                    <h2 className="text-sm sm:text-base mb-4">
+                    <h2 className="text-sm sm:text-base mb-4 text-muted-foreground">
                         Add details about your job position/role, job description,
                         your skills and years of experience 
                     </h2>
                     <div className="my-3 p-1">
-                        <label className="block text-sm font-medium mb-1">Job Role/Job Position</label>
+                        <label className="block text-sm font-medium mb-1 text-foreground">Job Role/Job Position</label>
                         <Input placeholder="Eg. FrontEnd Engineer" required
                         onChange={(e)=>setJobPosition(e.target.value)}
                         className="w-full"></Input>
                     </div>
                     <div className="my-3 p-1">
-                        <label className="block text-sm font-medium mb-1">Job Description and Tech Stack (in short)</label>
+                        <label className="block text-sm font-medium mb-1 text-foreground">Job Description and Tech Stack (in short)</label>
                         <Textarea 
                         placeholder="Eg. Reactjs, Nodejs, Nextjs, UI design" required
                         onChange={(e)=>setJobDesc(e.target.value)}
                         className="w-full min-h-[80px] resize-none"></Textarea>
                     </div>
                     <div className="my-3 p-1">
-                        <label className="block text-sm font-medium mb-1">Years of Experience</label>
+                        <label className="block text-sm font-medium mb-1 text-foreground">Years of Experience</label>
                         <Input placeholder="Eg. 5" type="number" required max="50"
                         onChange={(e)=>setJobExperience(e.target.value)}
                         className="w-full"></Input>
                     </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-end mt-6">
-                    <Button variant = "ghost" type="button" className="border-2 border-black text-black w-full sm:w-auto order-2 sm:order-1"
+                    <Button variant = "ghost" type="button" className="border-2 border-foreground text-foreground w-full sm:w-auto order-2 sm:order-1"
                     onClick={()=>setOpenDialog(false)}>Cancel</Button>
                     <Button type="submit" disabled={loadings} className="w-full sm:w-auto order-1 sm:order-2">
                     {loadings ?

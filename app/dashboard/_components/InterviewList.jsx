@@ -54,13 +54,13 @@ function InterviewList() {
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <h2 className="font-medium text-lg sm:text-xl">Previous Attempted Interviews</h2>
+        <h2 className="font-medium text-lg sm:text-xl text-foreground">Previous Attempted Interviews</h2>
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <Input
             placeholder="Search by role or description"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full sm:w-64"
+            className="w-full sm:w-64 bg-background"
             aria-label="Search interviews"
           />
           <Button 
