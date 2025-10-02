@@ -152,13 +152,13 @@ const RecordAnswerSection = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-4 sm:p-6">
       <div className="mb-4 sm:mb-6">
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 flex items-center">
-          <Video className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-fuchsia-600 flex-shrink-0" />
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200 flex items-center">
+          <Video className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-fuchsia-600 dark:text-fuchsia-400 flex-shrink-0" />
           Record Your Answer
         </h2>
-        <p className="text-gray-600 text-xs sm:text-sm mt-1">
+        <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mt-1">
           Speak clearly and take your time. Your response will be automatically
           transcribed.
         </p>
@@ -196,17 +196,17 @@ const RecordAnswerSection = ({
 
       {/* Transcription Area */}
       {(userAnswer || isRecording) && (
-        <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
-          <h3 className="text-xs sm:text-sm font-medium text-gray-700 mb-2">
+        <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <h3 className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Live Transcription:
           </h3>
-          <div className="text-gray-900 min-h-[48px] sm:min-h-[60px] max-h-32 sm:max-h-40 overflow-y-auto text-sm sm:text-base">
+          <div className="text-gray-900 dark:text-gray-100 min-h-[48px] sm:min-h-[60px] max-h-32 sm:max-h-40 overflow-y-auto text-sm sm:text-base">
             {userAnswer}
             {isRecording && interimResult && (
-              <span className="text-gray-500 italic"> {interimResult}</span>
+              <span className="text-gray-500 dark:text-gray-400 italic"> {interimResult}</span>
             )}
             {isRecording && !interimResult && !userAnswer && (
-              <span className="text-gray-400 italic">Listening...</span>
+              <span className="text-gray-400 dark:text-gray-500 italic">Listening...</span>
             )}
           </div>
         </div>
@@ -238,15 +238,15 @@ const RecordAnswerSection = ({
         </Button>
 
         {loading && (
-          <div className="mt-3 sm:mt-4 flex items-center justify-center text-fuchsia-600">
+          <div className="mt-3 sm:mt-4 flex items-center justify-center text-fuchsia-600 dark:text-fuchsia-400">
             <Loader className="animate-spin h-4 w-4 mr-2" />
             <span className="text-xs sm:text-sm">Processing your answer...</span>
           </div>
         )}
 
         {error && (
-          <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-xs sm:text-sm text-red-600 text-center">
+          <div className="mt-2 p-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg">
+            <p className="text-xs sm:text-sm text-red-600 dark:text-red-400 text-center">
               <strong>Microphone error:</strong> {error}
             </p>
           </div>
