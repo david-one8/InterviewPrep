@@ -1,5 +1,5 @@
 "use client";
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
     Dialog,
     DialogContent,
@@ -21,41 +21,39 @@ import moment from 'moment/moment';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 
-
-export const NewInterview = () => {
-    const [OpenDialog, setOpenDialog] = useState(false);
+export const NewInterview = ({ openDialog, setOpenDialog }) => {
     const [jobPosition, setJobPosition] = useState();
     const [jobDesc, setJobDesc] = useState();
     const [jobExperience, setJobExperience] = useState();
     const [loadings, setLoadings] = useState(false);
     const [jsonResponse, setJsonResponse] = useState([]);
-
+    
+    // Local state for when props are not provided (backward compatibility)
+    const [localOpenDialog, setLocalOpenDialog] = useState(false);
+    
+    // Use prop state if provided, otherwise use local state
+    const isDialogOpen = openDialog !== undefined ? openDialog : localOpenDialog;
+    const handleDialogChange = setOpenDialog || setLocalOpenDialog;
 
     const {user} = useUser();
     const router = useRouter();
     const path = usePathname();
-    console.log(path);
-
 
     const onSubmit = async(e) => {
         e.preventDefault();
         setLoadings(true);
         console.log(jobDesc, jobPosition, jobExperience);
 
-
         const Inputprompt = "Job Position: "+ jobPosition + ", Job description: "  + jobDesc + ", Years of experience: "+ jobExperience +", Depending on this information, generate 5 interview questions with answers in JSON formate. Give Question and Answered as fields in JSON. Do not add any unnecessary explanation in the response. just the json response";
-
 
         const result = await chatSession.sendMessage(Inputprompt);
         let mockjsonresponse = await result.response.text();
 
         // Remove all markdown code block markers and stray 'json' text globally, then trim
         mockjsonresponse = mockjsonresponse
-                 .split('```json').join('')
                  .split('```').join('')
                  .replace(/json/gi, '')
                  .trim();
-
 
         // Extract JSON substring to last closing brace or bracket
         const lastBrace = mockjsonresponse.lastIndexOf('}');
@@ -65,9 +63,7 @@ export const NewInterview = () => {
             mockjsonresponse = mockjsonresponse.substring(0, truncateAt + 1);
         }
 
-
         setJsonResponse(mockjsonresponse);
-
 
         try {
             const parsedResponse = JSON.parse(mockjsonresponse);
@@ -84,10 +80,9 @@ export const NewInterview = () => {
                     createdAt: moment().format('DD-MM-yyyy'),
                 }).returning({mockId: MockInterview.mockId});
 
-
                 console.log("Inserted id", resp);
                 if(resp ){
-                    setOpenDialog(false);
+                    handleDialogChange(false);
                     if(path != "/dashboard/interview/"+resp[0]?.mockId){
                         router.push("/dashboard/interview/"+resp[0]?.mockId);
                     }
@@ -97,19 +92,17 @@ export const NewInterview = () => {
             console.error("JSON parsing error:", error, mockjsonresponse);
         }
 
-
         setLoadings(false);
     };
-
 
     return (
     <div>
         <div className="p-6 sm:p-8 lg:p-10 border rounded-lg bg-secondary
         hover:scale-105 hover:shadow-md cursor-pointer transition-all touch-manipulation"
-        onClick={()=>setOpenDialog(true)}>
-            <h2 className="font-bold text-base sm:text-lg text-center">+ Add New</h2>
+        onClick={()=>handleDialogChange(true)}>
+            <h2 className="font-bold text-base sm:text-lg text-center">Click Here to Start Interview 🎯</h2>
         </div>
-        <Dialog open={OpenDialog}>
+        <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
         <DialogContent className="max-w-2xl w-[95vw] sm:w-full max-h-[90vh] overflow-y-auto">
             <DialogHeader>
             <DialogTitle className="text-lg sm:text-2xl">
@@ -143,7 +136,7 @@ export const NewInterview = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-end mt-6">
                     <Button variant = "ghost" type="button" className="border-2 border-foreground text-foreground w-full sm:w-auto order-2 sm:order-1"
-                    onClick={()=>setOpenDialog(false)}>Cancel</Button>
+                    onClick={()=>handleDialogChange(false)}>Cancel</Button>
                     <Button type="submit" disabled={loadings} className="w-full sm:w-auto order-1 sm:order-2">
                     {loadings ?
                         <>
